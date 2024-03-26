@@ -34,6 +34,7 @@ int obtenerRotacion(int *posActual, int **matriz, int orden, int estado){
     int columna = posActual[1];
     fila = columna;
     columna = 2*medio - filaAux;
+
     if(estado == 1) return matriz[fila][columna];
     else if(estado == 2){
         filaAux = fila;
@@ -41,12 +42,13 @@ int obtenerRotacion(int *posActual, int **matriz, int orden, int estado){
         columna = 2*medio - filaAux;
         return matriz[fila][columna];
     }
-    else{
+    else if(estado == 3){
         filaAux = fila;
         fila = columna;
         columna = 2*medio - filaAux;
         return matriz[fila][columna];
     }
+    else return matriz[posActual[0]][posActual[1]];
 }
 
 void destruirEstructura(int ***estructura){
