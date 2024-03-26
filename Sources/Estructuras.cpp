@@ -51,6 +51,17 @@ int obtenerRotacion(int *posActual, int **matriz, int orden, int estado){
     else return matriz[posActual[0]][posActual[1]];
 }
 
+int *generarOrdenes(int orden, int tamano){
+    int *ordenes = new int[tamano];
+    for(int cont = 0; cont < tamano; cont++) ordenes[cont] = orden;
+    return ordenes;
+}
+
+void editarEstructura(int indice, int ordenNueva, int ***estructura){
+    delete [] estructura[indice];
+    estructura[indice] = crearMatriz(ordenNueva);
+}
+
 void destruirEstructura(int ***estructura){
     delete [] estructura;
 }
