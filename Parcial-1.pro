@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        Sources/Candado.cpp \
         Sources/Estructuras.cpp \
         main.cpp
 
