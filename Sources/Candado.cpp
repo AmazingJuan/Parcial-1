@@ -30,7 +30,7 @@ int **generarCandado(int *regla, int sizeRegla){
         ordenAux[0] = ordenes[cont];
         ordenAux[1] = ordenes[cont+1];
         while(enProceso){
-            boolAux = encontrarComb(estructura[cont], estructura[cont], reglaFunc, resulAux, ordenAux);
+            boolAux = encontrarComb(estructura[cont], estructura[cont+1], reglaFunc, resulAux, ordenAux);
             if(boolAux == false){
                 if(cont == 0){
                     enteroAux = genRandom(0, 1);

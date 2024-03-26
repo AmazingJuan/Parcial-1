@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
     int *regla = new int[5];
-    regla[0] = 8;
+    regla[0] = 4;
     regla[1] = 3;
     regla[2] = 1;
     regla[3] = -1;
