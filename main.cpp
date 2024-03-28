@@ -11,8 +11,6 @@ int main()
     regla[2] = -1;
     regla[3] = 1;
     regla[4] = -1;
-    regla[5] = -1;
-    regla[6] = -1;
     int **resultado = generarCandado(regla, 7);
 
     for(int contador = 0; contador < 7 - 1; contador++){
