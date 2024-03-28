@@ -7,7 +7,7 @@ int** crearMatriz(int orden){
     for(int fila = 0; fila < orden; fila++){
         matriz[fila] = new int[orden];
         for(int columna = 0; columna < orden; columna++){
-            if(fila == medio & columna == medio){
+            if(fila == medio && columna == medio){
                 matriz[fila][columna] = -1;
             }
             else{
@@ -17,6 +17,11 @@ int** crearMatriz(int orden){
         }
     }
     return matriz;
+}
+
+int **rotarMatriz(int **matriz, int orden, int estado){
+
+
 }
 
 int ***crearEstructura(int *ordenes, int numMatrices){
