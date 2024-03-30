@@ -2,27 +2,53 @@
 #include "../Headers/Estructuras.h"
 #include "../Headers/Utilidades.h"
 
+/**
+ * Breve descripción de la función validarRegla.
+ *
+ * Permite validar una regla ingresada por el usuario
+ *
+ * @param regla Puntero que debe ser un arreglo de enteros, y representa la regla del candado.
+ * @param sizeRegla Entero que representa el tamaño de la regla.
+ * @return Devuelve un booleano queq indica si la regla es valida o no.
+ */
+
 bool validarRegla(int *regla, int sizeRegla){
-    int ordenMin;
-    if(regla[0] < 0 || regla[1] < 0) return false;
-    if(sizeRegla <= 2) return false;
+    int ordenMin; //Se inicializa el orden minimo que va a tener un elemento de
+    int medio; //Se inicializa el valor medio de la matriz de orden minimo.
+    if(regla[0] < 0 || regla[1] < 0) return false; // Verifica que las coordenadas de la celda no sean negativas
+    if(sizeRegla <= 2) return false; //Verifica que la longitud de la regla no sea inferior a 3
     for(int cont = 2; cont < sizeRegla; cont++){
-        if(regla[cont] != 0 && regla[cont] != -1 && regla[cont] != 1) return false;
+        if(regla[cont] != 0 && regla[cont] != -1 && regla[cont] != 1) return false; //Para cada elemento de la regla verifica si es -1, 1 o 0.
     }
-    /*
-    if(regla[0] == 0 && regla[0] <= 2 && sizeRegla >= 4){
-        if(regla[2] == 1 && regla[3] == 1) return false;
-        if(sizeRegla > 4 && regla[2] == 1 && regla[3] == 0 && regla[4] == 1) return false;
+
+    //Las lineas de la 25 - 35 verifican que la celda no tenga coordenadas del punto medio de la matriz.
+    if(regla[0] >= regla[1]){
+        ordenMin = regla[0];
     }
-    */
+    else ordenMin = regla[1];
 
+    if(ordenMin % 2 == 0) ordenMin += 1;
+    else ordenMin += 2;
 
+    if(regla[0] == regla[1] && regla[0] == 0) ordenMin = 3;
+    medio = ordenMin /2;
+    if(regla[0] == medio && regla[1] == medio) return false;
 
-    return true;
+    return true; //Entrega el boolean true, que indica que la regla es valida.
 }
 
+/**
+ * Breve descripción de la función generarCandado.
+ *
+ * Permite hallar una configuracion de candado que cumpla una regla, si el algoritmo lo permite.
+ *
+ * @param regla Puntero que debe ser un arreglo de enteros, y representa la regla del candado.
+ * @param sizeRegla Entero que representa el tamaño de la regla.
+ * @return Devuelve una matriz que contiene el orden y el estado de cada estructura del candado generado (si el algoritmo encuentra una combinacion).
+ */
 
 int **generarCandado(int *regla, int sizeRegla){
+    int intentos = 0; //Se inicializa el contador que
     int estadoUno = -1;
     int estadoDos = -1;
     int **resultado = new int*[sizeRegla - 1];
@@ -73,6 +99,11 @@ int **generarCandado(int *regla, int sizeRegla){
                 else resultado[cont + 1][0] = ordenAux[1];  resultado[cont+1][1] = resulAux[1]; reglaFunc[2] = regla[3 + cont];
                 enProceso = false;
                 estadoUno = resulAux[1];
+            }
+            intentos++;
+            if(intentos > 50){
+                resultado[0][0] = -1;
+                return resultado;
             }
         }
         enProceso = true;
