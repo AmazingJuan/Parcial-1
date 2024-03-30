@@ -19,11 +19,6 @@ int** crearMatriz(int orden){
     return matriz;
 }
 
-int **rotarMatriz(int **matriz, int orden, int estado){
-
-
-}
-
 int ***crearEstructura(int *ordenes, int numMatrices){
     int ***estructuraPtr = new int**[numMatrices];
     for(int cont = 0; cont < numMatrices; cont++){
@@ -69,4 +64,16 @@ void editarEstructura(int indice, int ordenNueva, int ***estructura){
 
 void destruirEstructura(int ***estructura){
     delete [] estructura;
+}
+
+int *formarRegla(int fila, int columna, string criterios){
+    int *regla = new int[2 + criterios.size()];
+    regla[0] = fila - 1;
+    regla[1] = columna -1;
+    for(int cont = 0; cont < criterios.size(); cont++){
+        if(criterios.at(cont) == '1') regla[2 + cont] = 1;
+        else if(criterios.at(cont) == '2') regla[2 + cont] = 0;
+        else regla[2 + cont] = -1;
+    }
+    return regla;
 }

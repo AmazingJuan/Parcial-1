@@ -3,11 +3,21 @@
 #include "../Headers/Utilidades.h"
 
 bool validarRegla(int *regla, int sizeRegla){
+    int ordenMin;
     if(regla[0] < 0 || regla[1] < 0) return false;
     if(sizeRegla <= 2) return false;
     for(int cont = 2; cont < sizeRegla; cont++){
         if(regla[cont] != 0 && regla[cont] != -1 && regla[cont] != 1) return false;
     }
+    /*
+    if(regla[0] == 0 && regla[0] <= 2 && sizeRegla >= 4){
+        if(regla[2] == 1 && regla[3] == 1) return false;
+        if(sizeRegla > 4 && regla[2] == 1 && regla[3] == 0 && regla[4] == 1) return false;
+    }
+    */
+
+
+
     return true;
 }
 
@@ -29,6 +39,8 @@ int **generarCandado(int *regla, int sizeRegla){
     if(ordenMin % 2 == 0) ordenMin += 1;
     else ordenMin += 2;
 
+    if(regla[0] == regla[1] && regla[0] == 0) ordenMin = 3;
+
     int *ordenes = generarOrdenes(ordenMin, sizeRegla-1);
     int ***estructura = crearEstructura(ordenes, sizeRegla - 1);
     int *reglaFunc = new int[5]; reglaFunc[0] =  regla[0]; reglaFunc[1] = regla[1]; reglaFunc[2] = regla[2]; reglaFunc[3] = 0; reglaFunc[4] = 0;
@@ -41,9 +53,8 @@ int **generarCandado(int *regla, int sizeRegla){
             boolAux = encontrarComb(estructura[cont], estructura[cont+1], reglaFunc, resulAux, ordenAux, estadoUno, estadoDos);
             if(!boolAux){
                 if(cont == 0){
-                    enteroAux = genRandom(0, 1);
-                    ordenAux[enteroAux] += 2;
-                    ordenes[enteroAux] += 2;
+                    ordenAux[0] += 2;
+                    ordenes[0] += 2;
                     editarEstructura(enteroAux, ordenAux[enteroAux], estructura);
                 }
                 else{
