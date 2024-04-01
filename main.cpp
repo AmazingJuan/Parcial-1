@@ -21,7 +21,7 @@ int main(){
     while(bandera){
         limpiarPantalla();
         cout << obtenerMensaje(1);
-        congelarPantalla(7);
+        congelarPantalla(0);
         limpiarPantalla();
         fila = menuNumero(obtenerMensaje(2), "la fila de la celda");
         columna = menuNumero(obtenerMensaje(3), "la columna de la celda");
@@ -69,4 +69,5 @@ int main(){
     delete [] configCandado;
     delete [] opcVisualizacion;
     delete [] opcionesCriterio;
+    return 0;
 }

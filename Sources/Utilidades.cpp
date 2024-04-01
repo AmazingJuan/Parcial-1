@@ -1,39 +1,78 @@
 #import "../Headers/Utilidades.h"
 
 
-int genRandom(int menor, int mayor){ //fue sacada de internet
+/**
+ * Breve descripción de la función genRandom.
+ *
+ * Genera un numero aleatorio entre un numero menor y un numero mayor, el numero mayor es considerado en la generacion del numero.
+ *
+ * @param menor Numero que servira como limite inferior para la generacion del numero aleatorio.
+ * @param mayor Numero que servira como limite superior para la generacion del numero aleatorio.
+ * @return Un entero aleatorio comprendido entre el numero menor y el numero mayor, incluyendolos.
+ */
+
+
+int genRandom(int menor, int mayor){ //Hicimos uso de un codigo de internet localizado acá: https://learn.microsoft.com/en-us/cpp/standard-library/random?view=msvc-170. No usamos la funcion para numeros aleatorios que se recomendo en la practica 1 o 2 ya que estos numeros eran pseudo aleatorios.
     random_device rd;
     mt19937 gen(rd());
     uniform_int_distribution<> dist(menor, mayor);
     return dist(gen);
 }
 
+/**
+ * Breve descripción de la función limpiarPantalla.
+ *
+ * Imprime 50 saltos de linea, simulando que se elimino lo que habia previamente en la pantalla.
+ *
+ * @return Ninguno, solo son impresiones.
+ */
+
 void limpiarPantalla(){
     for(int cont = 0; cont < 50; cont++) cout << "\n";
 }
+
+/**
+ * Breve descripción de la función stringInArray.
+ *
+ * Verifica si una cadena es un elemento de un arreglo.
+ *
+ * @param cadena Cadena dada.
+ * @param arreglo Arreglo en el cual debe comprobarse si existe una cadena dada o no.
+ * @param lenArreglo Tamaño del arreglo dado.
+ * @return Booleano que indica si la cadena dada es un elemento del arreglo especificado.
+ */
 
 bool stringInArray(string cadena, string* arreglo, int lenArreglo){
     for(int cont = 0; cont < lenArreglo; cont ++) if(cadena == arreglo[cont]) return true;
     return false;
 }
 
+/**
+ * Breve descripción de la función obtenerMensaje.
+ *
+ * Permite obtener un mensaje segun un parametro dado, los mensajes son completamente parte de la seccion de experiencia de usuario.
+ *
+ * @param parametro Numero que indica que mensaje se desea obtener.
+ * @return String que contiene el mensaje deseado.
+ */
+
 string obtenerMensaje(int parametro){
     switch (parametro){
-        case 1:
+        case 1: //Mensaje de bienvenida
             return "  ____    _                                         _       _         \n |  _ \\  (_)                                       (_)     | |        \n | |_) |  _    ___   _ __   __   __   ___   _ __    _    __| |   ___  \n |  _ <  | |  / _ \\ | '_ \\  \\ \\ / /  / _ \\ | '_ \\  | |  / _` |  / _ \\ \n | |_) | | | |  __/ | | | |  \\ V /  |  __/ | | | | | | | (_| | | (_) |\n |____/  |_|  \\___| |_| |_|   \\_/    \\___| |_| |_| |_|  \\__,_|  \\___/ \n\nBienvenido al Desafio 1, en unos momentos podra ingresar la regla para generar el candado...";
-        case 2:
+        case 2: //Mensaje para que el usuario ingrese la fila
             return "  ______   _   _         \n |  ____| (_) | |        \n | |__     _  | |   __ _ \n |  __|   | | | |  / _` |\n | |      | | | | | (_| |\n |_|      |_| |_|  \\__,_|\n                         \n";
-        case 3:
+        case 3: //Mensaje para que el usuario ingrese la columna
             return "   _____           _                                     \n  / ____|         | |                                    \n | |        ___   | |  _   _   _ __ ___    _ __     __ _ \n | |       / _ \\  | | | | | | | '_ ` _ \\  | '_ \\   / _` |\n | |____  | (_) | | | | |_| | | | | | | | | | | | | (_| |\n  \\_____|  \\___/  |_|  \\__,_| |_| |_| |_| |_| |_|  \\__,_|\n                                                         \n";
-        case 4:
+        case 4: //Mensaje para que el usuario ingrese el criterio deseado (contiene las opciones).
             return "   _____          _   _                   _         \n  / ____|        (_) | |                 (_)        \n | |       _ __   _  | |_    ___   _ __   _    ___  \n | |      | '__| | | | __|  / _ \\ | '__| | |  / _ \\ \n | |____  | |    | | | |_  |  __/ | |    | | | (_) |\n  \\_____| |_|    |_|  \\__|  \\___| |_|    |_|  \\___/ \n                                                    \nHe aqui los criterios de comparacion disponibles para las estructuras ";
-        case 5:
+        case 5: //Mensaje de error.
             return "  ______                              \n |  ____|                             \n | |__     _ __   _ __    ___    _ __ \n |  __|   | '__| | '__|  / _ \\  | '__|\n | |____  | |    | |    | (_) | | |   \n |______| |_|    |_|     \\___/  |_|   \n                                      \n";
-        case 6:
+        case 6: //Indica al usuario que se pudo encontrar una combinacion que cumpliera la regla que ingreso.
             return "  ______          _   _          _       _               _              \n |  ____|        | | (_)        (_)     | |             | |             \n | |__      ___  | |  _    ___   _    __| |   __ _    __| |   ___   ___ \n |  __|    / _ \\ | | | |  / __| | |  / _` |  / _` |  / _` |  / _ \\ / __|\n | |      |  __/ | | | | | (__  | | | (_| | | (_| | | (_| | |  __/ \\__ \\\n |_|       \\___| |_| |_|  \\___| |_|  \\__,_|  \\__,_|  \\__,_|  \\___| |___/\n                                                                       \nFelicidades, hemos encontrado una combinacion de candado para la regla que usted especifico, fijese en las opciones que le brindamos:\n\n";
-        case 7:
+        case 7: //Mensaje que contiene la palabra "Visualizar matriz".
             return " __      __  _                         _   _                     _                \n \\ \\    / / (_)                       | | (_)                   | |               \n  \\ \\  / /   _   ___   _   _    __ _  | |  _   ____   __ _    __| |   ___    _ __ \n   \\ \\/ /   | | / __| | | | |  / _` | | | | | |_  /  / _` |  / _` |  / _ \\  | '__|\n    \\  /    | | \\__ \\ | |_| | | (_| | | | | |  / /  | (_| | | (_| | | (_) | | |   \n     \\/     |_| |___/  \\__,_|  \\__,_| |_| |_| /___|  \\__,_|  \\__,_|  \\___/  |_|   \n                                                                                   \nHe aqui la informacion de la Estructura ";
-        case 8:
+        case 8: //Mensaje de despedida.
             return "  _____                                    _   _       _               \n |  __ \\                                  | | (_)     | |              \n | |  | |   ___   ___   _ __     ___    __| |  _    __| |   __ _       \n | |  | |  / _ \\ / __| | '_ \\   / _ \\  / _` | | |  / _` |  / _` |      \n | |__| | |  __/ \\__ \\ | |_) | |  __/ | (_| | | | | (_| | | (_| |      \n |_____/   \\___| |___/ | .__/   \\___|  \\__,_| |_|  \\__,_|  \\__,_|      \n                       | |                                            \n                       |_|                                           \nMuchas gracias por usar nuestro programa, vuelva pronto...";
         default:
             return "";
@@ -62,6 +101,7 @@ string stringMatriz(int orden, int estado){
         resultado += "\n";
     }
     delete [] matriz;
+    delete [] posAux;
     return resultado;
 }
 
