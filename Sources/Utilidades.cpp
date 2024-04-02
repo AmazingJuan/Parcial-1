@@ -79,17 +79,38 @@ string obtenerMensaje(int parametro){
     }
 }
 
-void congelarPantalla(int segundos){
+/**
+ * Breve descripción de la función congelarPantalla.
+ *
+ * Permite congelar la pantalla por un tiempo determinado.
+ *
+ * @param segundos Numero que indica cuantos segundos se desea congelar la pantalla.
+ * @return Ninguno.
+ */
+
+void congelarPantalla(int segundos){ //Se usó el ejemplo dado en la siguiente pagina: https://en.cppreference.com/w/cpp/thread/sleep_for.
     this_thread::sleep_for(segundos * 1000ms);
 }
 
+/**
+ * Breve descripción de la función stringMatriz.
+ *
+ * Permite obtener la matriz de un orden especifico en un estado dado.
+ *
+ * @param orden Entero que nos habla del orden de la matriz.
+ * @param estado Estado de la matriz que se quiere obtener.
+ * @return String que representa la matriz en el estado dado, se rota si es necesario.
+ */
+
 string stringMatriz(int orden, int estado){
-    int **matriz = crearMatriz(orden);
-    string estadoAux;
-    int *posAux = new int[2];
-    if(estado == 0) estadoAux = "Neutral";
+    int **matriz = crearMatriz(orden); //Se crea la matriz en estado neutral.
+    string estadoAux; //String auxiliar para almacenar el estado de la matriz.
+    int *posAux = new int[2]; //Se crea un arreglo de enteros para poder ejecutar la funcion obtenerRotacion.
+    if(estado == 0) estadoAux = "Neutral"; //Si el estado como entero vale 0, entonces como string va a valer neutral, de otra manera simplemente se pone el numero de 1 - 3.
     else estadoAux = to_string(estado);
-    string resultado = "Orden: " + to_string(orden) + "\nEstado: " + estadoAux + "\n\nMatriz solicitada:\n\n";
+
+    string resultado = "Orden: " + to_string(orden) + "\nEstado: " + estadoAux + "\n\nMatriz solicitada:\n\n"; //Se inicializa un string donde se incluya el orden de la matriz y su estado
+    //Por ultimo se añade la matriz en el estado dado al string resultado mediante el ciclo for de las lineas 114 - 123.
     for(int fila = 0; fila < orden; fila++){
         posAux[0] = fila;
         for(int columna = 0; columna < orden; columna++){
@@ -100,17 +121,28 @@ string stringMatriz(int orden, int estado){
         }
         resultado += "\n";
     }
+
+    //Se libera memoria y posteriormente se retorna el string deseado.
     delete [] matriz;
     delete [] posAux;
     return resultado;
 }
 
+/**
+ * Breve descripción de la función generarOpciones.
+ *
+ * Genera el string que contiene las opciones de visualizacion de matrices para cuando se haya encontrado la conbinación de candado.
+ *
+ * @param numMatrices Entero que nos habla del numero de matrices que es posible visualizar.
+ * @return String que contiene las opciones deseadas.
+ */
+
 string **generarOpciones(int numMatrices){
-    string **resultado = new string*[2];
-    string aux = "";
-    resultado[0] = new string[numMatrices + 2];
-    resultado[1] = new string[1];
-    for(int cont = 0; cont < numMatrices + 2; cont++){
+    string **resultado = new string*[2]; //Se hace una matriz de strings.
+    string aux = ""; //Se define un string auxiliar
+    resultado[0] = new string[numMatrices + 2]; //Se crea en la posición 0 un arreglo de strings de tamaño numMatrices + 2, donde se incluyen el numero de las opciones de las matrices, y dos mas para salir del programa o volver a inciarlo.
+    resultado[1] = new string[1]; //Se crea un string que contendrá el texto que el usuario debe visulizar.
+    for(int cont = 0; cont < numMatrices + 2; cont++){ //Ciclo for que va agregando al arreglo de strings las opciones pertinentes, tal como el texto que se quiere mostrar.
         resultado[0][cont] = to_string(cont + 1);
         aux += to_string(cont + 1) + ". ";
         if(cont + 1 != numMatrices + 1 && cont + 1 != numMatrices + 2) aux += "Visualizar Estructura " + to_string(cont + 1);
@@ -118,6 +150,6 @@ string **generarOpciones(int numMatrices){
         else aux += "Salir del programa\n";
         aux += "\n";
     }
-    resultado[1][0] = aux;
+    resultado[1][0] = aux; //Se le asigna a la posicion del texto el string auxiliar que contenia el texto deseado.
     return resultado;
 }
