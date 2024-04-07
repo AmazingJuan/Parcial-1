@@ -54,6 +54,8 @@ int main(){
                     }
                     else if(opcMatrices == (contAux + 2)) bandera = false; //En caso de que seleccione salir del programa la bandera de control de ejecucion se vuelve falsa, y se para el ciclo while de la linea 29.
                 }
+                delete [] opcEst;
+
             }
             else{ //Si no se pudo encontrar una combinacion valida, entonces se lo hace saber al usuario y se vuelve a ejecutar el programa.
                 limpiarPantalla();

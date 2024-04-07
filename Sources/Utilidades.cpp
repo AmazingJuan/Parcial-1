@@ -13,10 +13,10 @@
 
 
 int genRandom(int menor, int mayor){ //Hicimos uso de un codigo de internet localizado acá: https://learn.microsoft.com/en-us/cpp/standard-library/random?view=msvc-170. No usamos la funcion para numeros aleatorios que se recomendo en la practica 1 o 2 ya que estos numeros eran pseudo aleatorios.
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_int_distribution<> dist(menor, mayor);
-    return dist(gen);
+    random_device rd; //Inicializa un dato de tipo random_device, que tiene como función generar una semilla aleatoria para el algoritmo de generacion de numeros.
+    mt19937 gen(rd()); //Se crea una instancia de la clase mt19937, donde el parametro del constructor es rd(), es decir la semilla aleatoria con la cual se generará el numero.
+    uniform_int_distribution<> dist(menor, mayor); //Se crea una instancia de la clase uniform_int_Distribution, esta crea una distribución uniforme de numeros enteros entre el numero menor y el mayor.
+    return dist(gen); //Finalmente se retorna un numero aleatorio que pertenece a la distribución.
 }
 
 /**
